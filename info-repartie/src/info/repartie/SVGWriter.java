@@ -16,6 +16,14 @@ public class SVGWriter {
 	private String body;
 	private String footer;
 	private String fileName;
+	/**
+	 * Date = 0 (x)
+	 */
+	private int start = 80;
+	/**
+	 * Step between 2 dates
+	 */
+	private int step  = 10;
 	
 	/**
 	 * Constructor
@@ -120,8 +128,6 @@ public class SVGWriter {
 	 * @param dateFin 
 	 */
 	public void dessinerSC (int num, int dateDeb, int dateFin){
-		int start = 80;
-		int step  = 10;
 		int startPosX = dateDeb * step;
 		int width     = dateFin * step - startPosX;
 		// 1 step is "step", so, start + dateDeb * step
@@ -136,6 +142,16 @@ public class SVGWriter {
 	 * @param dateFin Date 2
 	 */
 	public void dessinerREQ (int numDep, int numArr, int dateDeb, int dateFin){
-		
+		tracerFleche(step, step, step, step, footer);
+	}
+	
+	/**
+	 * Return the X position of an object
+	 * @param proc # of processus
+	 * @param date date
+	 * @return position X
+	 */
+	public int getPositionX(int proc , int date){
+		return start + date * step;
 	}
 }
