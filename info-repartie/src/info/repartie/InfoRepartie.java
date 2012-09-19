@@ -18,7 +18,10 @@ public class InfoRepartie {
 		SVGWriter svg = new SVGWriter("d:\\monsvg.svg");
 		for(int i = 1 ; i < 11 ; i++){
 			svg.dessinerProcessus(i, "Process #" + i);
-			svg.dessinerSC(3, 0, 20);
+			svg.dessinerSC(3, 0, 10);
+			svg.dessinerREQ(3, 5, 10, 15);
+			svg.dessinerREP(5, 1, 15, 30);
+			svg.dessinerREAL(1, 6, 30, 35);
 		}
 		try {
 			svg.close();
