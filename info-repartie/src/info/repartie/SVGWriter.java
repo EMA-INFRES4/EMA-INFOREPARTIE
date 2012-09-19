@@ -4,14 +4,53 @@
  */
 package info.repartie;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  *
  * @author Cyril
  */
 public class SVGWriter {
+	private String header;
+	private String body;
+	private String footer;
+	private String fileName;
 	
-	private void appendToBody(String aa){
-		
+	/**
+	 * Constructor
+	 * @param filename File to write
+	 */
+	public SVGWriter(String filename){
+		this.fileName = filename;
+		this.header = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
+			"<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"500\" width=\"500\">" +
+				"<defs>" +
+					"<marker id=\"Triangle\" viewBox=\"0 0 40 40\" refX=\"16\" refY=\"16\"" +
+						"markerWidth=\"10\" markerHeight=\"10\" orient=\"auto\">" +
+						"<path d=\"M 0 0 L 16 16 L 0 32 L 40 16 Z\" />" +
+					"</marker>" +
+				"</defs>";
+		this.footer = "</svg>";
+	}
+	
+	/**
+	 * Append data to body
+	 * @param data data to append
+	 */
+	private void appendToBody(String data){
+		this.body += "\n" + data + "\n";
+	}
+	
+	/**
+	 * Write the SVG file or throw IOException
+	 */
+	public void close() throws IOException {
+		FileWriter fw = new FileWriter(fileName);
+		fw.write(header);
+		fw.write(body);
+		fw.write(footer);
+		fw.close();
 	}
 	
 	/**
@@ -55,5 +94,16 @@ public class SVGWriter {
 	public void dessinerSC (int num, int dateDeb, int dateFin){
 		// TODO: Implement code
 		// TODO: Implement code
+	}
+
+	/**
+	 * Red arrow for REQUEST message
+	 * @param numDep Start process number
+	 * @param numArr Finish process number
+	 * @param dateDeb Date 1
+	 * @param dateFin Date 2
+	 */
+	public void dessinerREQ (int numDep, int numArr, int dateDeb, int dateFin){
+		
 	}
 }
