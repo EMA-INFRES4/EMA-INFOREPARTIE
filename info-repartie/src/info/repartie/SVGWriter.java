@@ -23,15 +23,15 @@ public class SVGWriter {
 	 */
 	public SVGWriter(String filename){
 		this.fileName = filename;
-		this.header = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
-			"<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"500\" width=\"500\">" +
-				"<defs>" +
-					"<marker id=\"Triangle\" viewBox=\"0 0 40 40\" refX=\"16\" refY=\"16\"" +
-						"markerWidth=\"10\" markerHeight=\"10\" orient=\"auto\">" +
-						"<path d=\"M 0 0 L 16 16 L 0 32 L 40 16 Z\" />" +
-					"</marker>" +
-				"</defs>";
-		this.footer = "</svg>";
+		this.header = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
+			"<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"500\" width=\"500\">\n" +
+				"<defs>\n" +
+					"<marker id=\"Triangle\" viewBox=\"0 0 40 40\" refX=\"16\" refY=\"16\"\n" +
+						"markerWidth=\"10\" markerHeight=\"10\" orient=\"auto\">\n" +
+						"<path d=\"M 0 0 L 16 16 L 0 32 L 40 16 Z\" />\n" +
+					"</marker>\n" +
+				"</defs>\n";
+		this.footer = "\n</svg>";
 	}
 	
 	/**
@@ -99,7 +99,7 @@ public class SVGWriter {
 	 * @param couleur Color
 	 */
 	public void ecrireText(int x, int y, String texte , String couleur){
-		this.appendToBody("<text x=\"" + x + "\" y=\"" + y +"\"></text>");
+		this.appendToBody("<text x=\"" + x + "\" y=\"" + y +"\">" + texte + "</text>");
 	}
 	
 	/**
@@ -108,7 +108,9 @@ public class SVGWriter {
 	 * @param nom Name
 	 */
 	public void dessinerProcessus(int num , String nom){
-		// TODO: Implement code
+		int curY = num * 40 ;
+		ecrireText(10 , curY , nom , Color.BLACK);
+		tracerFleche(10, curY + 10, 450 , curY + 10, Color.BLACK);
 	}
 	
 	/**
@@ -118,8 +120,12 @@ public class SVGWriter {
 	 * @param dateFin 
 	 */
 	public void dessinerSC (int num, int dateDeb, int dateFin){
-		// TODO: Implement code
-		// TODO: Implement code
+		int start = 80;
+		int step  = 10;
+		int startPosX = dateDeb * step;
+		int width     = dateFin * step - startPosX;
+		// 1 step is "step", so, start + dateDeb * step
+		tracerRectangle(start + startPosX , 40 * num , width , 10 , Color.RED);
 	}
 
 	/**
