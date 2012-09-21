@@ -1,9 +1,11 @@
 
 package info.repartie;
 
+import client.clientSelector;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.Port;
 
 /**
  *
@@ -14,7 +16,7 @@ public class InfoRepartie {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		SVGWriter svg = new SVGWriter("d:\\monsvg.svg");
 		for(int i = 1 ; i < 11 ; i++){
 			svg.dessinerProcessus(i, "Process #" + i);
@@ -25,6 +27,11 @@ public class InfoRepartie {
 		} catch (IOException ex) {
 			Logger.getLogger(InfoRepartie.class.getName()).log(Level.SEVERE, null, ex);
 		}
+		clientSelector cs = new clientSelector();
+		cs.setVisible(true);
+		
+		Server srv = new Server();
+		srv.run();
 		
 	}
 }
