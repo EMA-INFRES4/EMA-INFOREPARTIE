@@ -26,6 +26,10 @@ public class SVGWriter {
 	private int step  = 10;
 	
 	/**
+	 * Step between 2 process
+	 */
+	private int interline = 40;
+	/**
 	 * Constructor
 	 * @param filename File to write
 	 */
@@ -107,7 +111,7 @@ public class SVGWriter {
 	 * @param couleur Color
 	 */
 	public void ecrireText(int x, int y, String texte , String couleur){
-		this.appendToBody("<text x=\"" + x + "\" y=\"" + y +"\">" + texte + "</text>");
+		this.appendToBody("<text x=\"" + x + "\" y=\"" + y +"\"  fill=\"" + couleur + "\">" + texte + "</text>");
 	}
 	
 	/**
@@ -116,9 +120,9 @@ public class SVGWriter {
 	 * @param nom Name
 	 */
 	public void dessinerProcessus(int num , String nom){
-		int curY = num * 40 ;
-		ecrireText(10 , curY , nom , Color.BLACK);
-		tracerFleche(10, curY + 10, 450 , curY + 10, Color.BLACK);
+		int curY = num * interline ;
+		ecrireText(step , curY , nom , Color.BLACK);
+		tracerFleche(step, curY + step, 450 , curY + step, Color.BLACK);
 	}
 	
 	/**
@@ -131,7 +135,7 @@ public class SVGWriter {
 		int startPosX = dateDeb * step;
 		int width     = dateFin * step - startPosX;
 		// 1 step is "step", so, start + dateDeb * step
-		tracerRectangle(start + startPosX , 40 * num , width , 10 , Color.RED);
+		tracerRectangle(start + startPosX , interline * num , width , step , Color.RED);
 	}
 
 	/**
@@ -142,9 +146,44 @@ public class SVGWriter {
 	 * @param dateFin Date 2
 	 */
 	public void dessinerREQ (int numDep, int numArr, int dateDeb, int dateFin){
-		tracerFleche(step, step, step, step, footer);
+		int startPosX = dateDeb * step;
+		int stopPosX = dateFin * step;
+		tracerFleche(start + startPosX, interline*numDep, start+stopPosX, interline*numArr, Color.RED);
+		
+		ecrireText(start + startPosX, interline*numDep, String.valueOf(dateDeb), Color.BLACK);
+		ecrireText(start + stopPosX, interline*numArr, String.valueOf(dateFin), Color.BLACK);
 	}
 	
+	/**
+	 * Blue arrow for REQUEST message
+	 * @param numDep Start process number
+	 * @param numArr Stop process number
+	 * @param dateDeb Date 1
+	 * @param dateFin Date 2
+	 */
+	public void dessinerREP (int numDep, int numArr, int dateDeb, int dateFin){
+		int startPosX = dateDeb * step;
+		int stopPosX = dateFin * step;
+		tracerFleche(start + startPosX, interline*numDep, start+stopPosX, interline*numArr, Color.BLUE);
+		ecrireText(start + startPosX, interline*numDep, String.valueOf(dateDeb), Color.BLACK);
+		ecrireText(start + stopPosX, interline*numArr, String.valueOf(dateFin), Color.BLACK);
+	}
+	
+	/**
+	 * Green arrow for RELEASE message
+	 * @param numDep Start process number
+	 * @param numArr Stop process number
+	 * @param dateDeb Date 1
+	 * @param dateFin Date 2
+	 */
+	public void dessinerREAL (int numDep, int numArr, int dateDeb, int dateFin){
+		int startPosX = dateDeb * step;
+		int stopPosX = dateFin * step;
+		tracerFleche(start + startPosX, interline*numDep, start+stopPosX, interline*numArr, Color.GREEN);
+			
+		ecrireText(start + startPosX, interline*numDep, String.valueOf(dateDeb), Color.BLACK);
+		ecrireText(start + stopPosX, interline*numArr, String.valueOf(dateFin), Color.BLACK);
+	}
 	/**
 	 * Return the X position of an object
 	 * @param proc # of processus
