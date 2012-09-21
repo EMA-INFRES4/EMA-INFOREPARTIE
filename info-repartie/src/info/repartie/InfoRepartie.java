@@ -1,6 +1,7 @@
 
 package info.repartie;
 
+import client.Client;
 import client.clientSelector;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -17,6 +18,7 @@ public class InfoRepartie {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) throws IOException {
+		/*
 		SVGWriter svg = new SVGWriter("d:\\monsvg.svg");
 		for(int i = 1 ; i < 11 ; i++){
 			svg.dessinerProcessus(i, "Process #" + i);
@@ -32,7 +34,10 @@ public class InfoRepartie {
 		}
 		clientSelector cs = new clientSelector();
 		cs.setVisible(true);
-		
+		*/
+		Thread fils1 = new Thread(new Client("127.0.0.1" , 1234));
+		fils1.start();
+
 		Server srv = new Server();
 		srv.run();
 		

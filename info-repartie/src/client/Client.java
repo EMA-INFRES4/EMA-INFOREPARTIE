@@ -6,14 +6,18 @@ package client;
 import java.net.*;
 import java.util.Scanner;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author xtalandier
  */
-public class Client {
+public class Client implements Runnable {
 	private Socket socket = null;
 	private PrintWriter out;
+	private String ip;
+	private int port;
 	
 	/**
 	 * Constructor
@@ -21,9 +25,17 @@ public class Client {
 	 * @param port Server port
 	 */
 	public Client(String IP , int port){
+		this.ip = IP;
+		this.port = port;
+	}
+	
+	/**
+	 * Connect to server
+	 */
+	private void connectToServer(){
 		try {
 			System.out.println("CLIENT : Try to connect");
-			socket = new Socket(IP, port);
+			socket = new Socket(ip, port);
 			System.out.println("CLIENT : Connexion: OK");
 			out = new PrintWriter(socket.getOutputStream());
 		} catch (UnknownHostException e) {
@@ -40,5 +52,16 @@ public class Client {
 	public void saySomething(String speech){
 		out.println(speech);
 		out.flush();
+	}
+
+	@Override
+	public void run() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException ex) {
+			Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		connectToServer();
+		saySomething("REQ,1,2,3,4");
 	}
 }
