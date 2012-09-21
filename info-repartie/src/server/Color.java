@@ -1,4 +1,4 @@
-package info.repartie;
+package server;
 
 /**
  * Define color
