@@ -62,6 +62,8 @@ public class Client implements Runnable {
 			Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		connectToServer();
-		saySomething("REQ,1,2,3,4");
+		while(true){
+		saySomething("DONNEES DU TAMPON");
+		}
 	}
 }
