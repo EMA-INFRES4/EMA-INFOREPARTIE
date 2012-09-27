@@ -63,7 +63,7 @@ public class Client implements Runnable {
 		}
 		connectToServer();
 		while(true){
-		saySomething("DONNEES DU TAMPON");
+		//saySomething("DONNEES DU TAMPON");
 		}
 	}
 }

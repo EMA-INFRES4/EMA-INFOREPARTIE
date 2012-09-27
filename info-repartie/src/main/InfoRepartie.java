@@ -14,14 +14,11 @@ public class InfoRepartie {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) throws InterruptedException {
-		Thread prog1 = new Thread(new Program1());
-		prog1.start();
+		Thread client = new Thread(new Program1());
+		client.start();
 
-		Thread prog2 = new Thread(new Program2());
-		prog2.start();
+		Thread serveur = new Thread(new Program2());
+		serveur.start();
 		
-		Tampon tamponTest = new Tampon(3);
-		tamponTest.pushInBuffer("test");
-		System.out.println(tamponTest.pullInBuffer());
 	}
 }

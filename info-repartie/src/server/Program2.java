@@ -16,6 +16,7 @@ public class Program2 implements Runnable {
 			Server srv;
 			srv = new Server();
 			srv.run();
+
 		} catch (IOException ex) {
 			Logger.getLogger(Program2.class.getName()).log(Level.SEVERE, null, ex);
 		}
