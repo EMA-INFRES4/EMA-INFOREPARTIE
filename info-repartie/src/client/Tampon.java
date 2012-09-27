@@ -19,13 +19,14 @@ public class Tampon {
 	 * @param size Buffer Size
 	 */
 	public Tampon(int size){
+		this.buffer = new ArrayList<String>();
 		this.bufferSize=size;
 	}
 	
 	/**
 	 * Pull buffer infos
 	 */
-	synchronized String pullInBuffer() throws InterruptedException{
+	public synchronized String pullInBuffer() throws InterruptedException{
 		if(buffer.isEmpty()){
 			wait();
 			return null;
@@ -42,7 +43,7 @@ public class Tampon {
 	 * Push buffer infos
 	 * @param infoValue Info to add in the buffer
 	 */
-	synchronized void pushInBuffer(String infoValue) throws InterruptedException{
+	public synchronized void pushInBuffer(String infoValue) throws InterruptedException{
 		if(buffer.size()==bufferSize){
 			wait();
 		}
