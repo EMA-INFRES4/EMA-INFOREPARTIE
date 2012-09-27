@@ -59,11 +59,8 @@ public class ServerReader implements Runnable {
 	 */
 	private boolean parse(String line){
 		boolean retVal = true;
-		System.out.println("********");
 		StringTokenizer st = new StringTokenizer(line , ",");
-		System.out.println(st);
 		String command = st.nextToken();
-		System.out.println(command);
 		System.out.println("SERVER : The command is : " + command);
 		if(command.equals("REQ")){
 			int numDep  = Integer.parseInt(st.nextToken());
