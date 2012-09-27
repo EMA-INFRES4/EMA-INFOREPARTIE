@@ -9,24 +9,32 @@ import server.ServerReader;
  * @author xtalandier
  */
 public class Program1 implements Runnable {
-
-	public static Tampon tamponProducteurConsommateur = new Tampon(10);
 	
+	public static Tampon tamponProducteurConsommateur = new Tampon(10);
+	public static Program1 me;
 	@Override
 	public void run() {
-		try {
-			tamponProducteurConsommateur.pushInBuffer("REQ,1,2,10,11");
-		} catch (InterruptedException ex) {
-			Logger.getLogger(Program1.class.getName()).log(Level.SEVERE, null, ex);
-		}
-			
+	
+		Program1.me = this;
 		Thread fils1 = new Thread(new Client("127.0.0.1" , 1234));
 		fils1.start();
 		
-		try {
-			System.out.println(tamponProducteurConsommateur.pullInBuffer());
-		} catch (InterruptedException ex) {
-			Logger.getLogger(Program1.class.getName()).log(Level.SEVERE, null, ex);
+
+	}
+	
+	public void stage2(){
+		String[] messages = new String[2];
+		messages[0] = "REQ,1,2,10,11";
+		messages[1] = "EXIT";
+		for(int i = 0 ; i < 2 ; i++){
+			try {
+				tamponProducteurConsommateur.pushInBuffer(messages[i]);
+				Thread.sleep(5000);
+			} catch (InterruptedException ex) {
+				Logger.getLogger(Program1.class.getName()).log(Level.SEVERE, null, ex);
+			}
+			
 		}
+		
 	}
 }

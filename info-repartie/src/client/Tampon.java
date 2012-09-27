@@ -32,8 +32,8 @@ public class Tampon {
 			return null;
 		}
 		else {
-			String returnValue =  buffer.get(buffer.size()-1);
-			buffer.remove(returnValue);
+			String returnValue =  buffer.get(0);
+			buffer.remove(0);
 			notifyAll();
 			return returnValue;
 		}

@@ -38,6 +38,7 @@ public class Client implements Runnable {
 			socket = new Socket(ip, port);
 			System.out.println("CLIENT : Connexion: OK");
 			out = new PrintWriter(socket.getOutputStream());
+			Program1.me.stage2();
 		} catch (UnknownHostException e) {
 			System.err.println("Impossible de se connecter à l'adresse " + socket.getLocalAddress());
 		} catch (IOException e) {
@@ -50,6 +51,7 @@ public class Client implements Runnable {
 	 * @param speech message
 	 */
 	public void saySomething(String speech){
+		System.out.println("Client :" + speech);
 		out.println(speech);
 		out.flush();
 	}
@@ -63,7 +65,11 @@ public class Client implements Runnable {
 		}
 		connectToServer();
 		while(true){
-		//saySomething("DONNEES DU TAMPON");
+			try {
+				saySomething(Program1.me.tamponProducteurConsommateur.pullInBuffer());
+			} catch (InterruptedException ex) {
+				Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+			}
 		}
 	}
 }
