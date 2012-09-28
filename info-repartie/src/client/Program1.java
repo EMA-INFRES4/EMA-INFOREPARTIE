@@ -2,6 +2,7 @@ package client;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import server.SVGWriter;
 import server.ServerReader;
 
 /**
@@ -23,10 +24,13 @@ public class Program1 implements Runnable {
 	}
 	
 	public void stage2(){
-		String[] messages = new String[2];
+		String[] messages = new String[5];
 		messages[0] = "REQ,1,2,10,11";
-		messages[1] = "EXIT";
-		for(int i = 0 ; i < 2 ; i++){
+		messages[1] = "REAL,3,2,10,20";
+		messages[2] = "SC,6,5,10";
+		messages[3] = "REP,4,3,2,8";
+		messages[4] = "EXIT";
+		for(int i = 0 ; i < 5 ; i++){
 			try {
 				tamponProducteurConsommateur.pushInBuffer(messages[i]);
 				Thread.sleep(5000);

@@ -4,6 +4,7 @@ package main;
 import client.Program1;
 import client.Tampon;
 import server.Program2;
+import server.SVGWriter;
 /**
  *
  * @author xtalandier

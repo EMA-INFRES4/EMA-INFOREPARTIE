@@ -37,6 +37,9 @@ public class ServerReader implements Runnable {
 	public void run() {
 		try {
 			svg = new SVGWriter("d:\\svgServer.svg");
+			for (int i = 1; i < 11; i++) {
+				svg.dessinerProcessus(i, "Process #" + i);
+			}
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream());
 			out.println("Hi! What can I do for you ?");
@@ -81,6 +84,20 @@ public class ServerReader implements Runnable {
 			} catch (IOException ex) {
 				Logger.getLogger(ServerReader.class.getName()).log(Level.SEVERE, null, ex);
 			}
+		}
+		else if (command.equals("REP")){
+			int numDep  = Integer.parseInt(st.nextToken());
+			int numArr  = Integer.parseInt(st.nextToken());
+			int dateDeb = Integer.parseInt(st.nextToken());
+			int dateFin = Integer.parseInt(st.nextToken());
+			svg.dessinerREP(numDep, numArr, dateDeb, dateFin);
+		}
+		else if (command.equals("REAL")){
+			int numDep  = Integer.parseInt(st.nextToken());
+			int numArr  = Integer.parseInt(st.nextToken());
+			int dateDeb = Integer.parseInt(st.nextToken());
+			int dateFin = Integer.parseInt(st.nextToken());
+			svg.dessinerREAL(numDep, numArr, dateDeb, dateFin);
 		}
 		return retVal;
 	}
