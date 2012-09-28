@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import common.*;
 
 /**
  *
@@ -22,7 +23,9 @@ public class ServerReader implements Runnable {
 	private BufferedReader in;
 	private PrintWriter out = null;
 	SVGWriter svg;
-
+	
+	private Message[] msgs      = new Message[1000];
+	private int       msgOffset = 0;
 	public ServerReader(BufferedReader in, String login){
 		this.in = in;
 	}
@@ -48,10 +51,26 @@ public class ServerReader implements Runnable {
 			while(dontStop){
 				String speech = in.readLine();
 				System.out.println("SERVER : He said '" + speech + "'");
-				dontStop = parse(speech);
+				msgs[msgOffset++] = Message.fromString(speech);
+				if(speech.equals("EXIT")){
+					dontStop = false;
+					analyze();
+				}
 			}
 		} catch (IOException ex) {
 			Logger.getLogger(ServerReader.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+	
+	/**
+	 * Sort & parses messages
+	 */
+	private void analyze(){
+		// Sort objects
+		
+		// Parse strings
+		for(int i = 0 ; i < msgOffset ; i++){
+			parse(msgs[i].getData());
 		}
 	}
 	

@@ -1,9 +1,9 @@
 package client;
 
+import common.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import server.SVGWriter;
-import server.ServerReader;
+import server.*;
 
 /**
  *
@@ -13,6 +13,8 @@ public class Program1 implements Runnable {
 	
 	public static Tampon tamponProducteurConsommateur = new Tampon(10);
 	public static Program1 me;
+	Horloge lamport = new Horloge();
+	
 	@Override
 	public void run() {
 	
@@ -32,8 +34,13 @@ public class Program1 implements Runnable {
 		messages[4] = "EXIT";
 		for(int i = 0 ; i < 5 ; i++){
 			try {
-				tamponProducteurConsommateur.pushInBuffer(messages[i]);
-				Thread.sleep(5000);
+				// Increment clock
+				lamport.tick();
+				// Create message
+				Message msg = new Message(messages[i], lamport.getTime());
+				// Send message
+				tamponProducteurConsommateur.pushInBuffer(messages[i].toString());
+				Thread.sleep(1000);
 			} catch (InterruptedException ex) {
 				Logger.getLogger(Program1.class.getName()).log(Level.SEVERE, null, ex);
 			}
