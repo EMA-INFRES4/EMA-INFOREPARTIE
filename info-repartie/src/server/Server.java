@@ -20,7 +20,7 @@ public class Server implements Runnable {
 
 	public static int nbClient = 0;
 
-	private int port = 1234;
+	private int port = 5234;
 	private ServerSocket socketserver;
 	private Socket socket;
 

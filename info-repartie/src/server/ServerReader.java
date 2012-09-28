@@ -13,6 +13,7 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import common.*;
+import java.util.Arrays;
 
 /**
  *
@@ -51,10 +52,11 @@ public class ServerReader implements Runnable {
 			while(dontStop){
 				String speech = in.readLine();
 				System.out.println("SERVER : He said '" + speech + "'");
-				msgs[msgOffset++] = Message.fromString(speech);
 				if(speech.equals("EXIT")){
 					dontStop = false;
 					analyze();
+				}else{
+					msgs[msgOffset++] = Message.fromString(speech);
 				}
 			}
 		} catch (IOException ex) {
@@ -67,9 +69,12 @@ public class ServerReader implements Runnable {
 	 */
 	private void analyze(){
 		// Sort objects
-		
+		for(int i = 0 ; i < msgOffset ; i++){
+			Arrays.sort(msgs);
+		}
 		// Parse strings
 		for(int i = 0 ; i < msgOffset ; i++){
+			
 			parse(msgs[i].getData());
 		}
 	}

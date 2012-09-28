@@ -19,7 +19,7 @@ public class Program1 implements Runnable {
 	public void run() {
 	
 		Program1.me = this;
-		Thread fils1 = new Thread(new Client("127.0.0.1" , 1234));
+		Thread fils1 = new Thread(new Client("127.0.0.1" , 5234));
 		fils1.start();
 		
 
@@ -39,7 +39,7 @@ public class Program1 implements Runnable {
 				// Create message
 				Message msg = new Message(messages[i], lamport.getTime());
 				// Send message
-				tamponProducteurConsommateur.pushInBuffer(messages[i].toString());
+				tamponProducteurConsommateur.pushInBuffer(msg.toString());
 				Thread.sleep(1000);
 			} catch (InterruptedException ex) {
 				Logger.getLogger(Program1.class.getName()).log(Level.SEVERE, null, ex);

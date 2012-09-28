@@ -7,7 +7,7 @@ import java.io.*;
  *
  * @author Xavier TALANDIER
  */
-public class Message implements Serializable {
+public class Message implements Serializable , Comparable<Message> {
 
 	private int estampille;
 	private String data;
@@ -58,4 +58,25 @@ public class Message implements Serializable {
 	public String toString(){
 		return this.estampille + "|" + data;
 	}
+
+	
+	/**
+	 * 
+	 * Comparable - method compareTo()
+	 * @param t Message
+	 * @return 
+	 */
+	@Override
+	public int compareTo(Message t) {
+		if(this.getEstampille() > t.getEstampille()){
+			return 1;
+		}
+		else if (this.getEstampille() == t.getEstampille()){
+			return 0;
+		}
+		else{
+			return -1;
+		}	
+	}
+	
 }
