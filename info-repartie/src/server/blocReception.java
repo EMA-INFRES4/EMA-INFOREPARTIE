@@ -1,5 +1,6 @@
 package server;
 
+import client.tamponReception;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,7 +27,7 @@ public class blocReception extends Thread {
 	public void run() {
 		try {
 			socketserver = new ServerSocket(2000);
-			
+			tamponReception myTamponReception = new tamponReception(1000);
 			while(true){
 				socketClient = socketserver.accept();
 
@@ -35,8 +36,13 @@ public class blocReception extends Thread {
 				while(!buffer.ready()) {};
 
 				String textMess = buffer.readLine();
-
-				// traitement du message :  System.out.print(textMess);
+				
+				try {
+					myTamponReception.pushInBuffer(textMess);
+					// traitement du message :  System.out.print(textMess);
+				} catch (InterruptedException ex) {
+					Logger.getLogger(blocReception.class.getName()).log(Level.SEVERE, null, ex);
+				}
 			}
 			
 			
