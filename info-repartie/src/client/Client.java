@@ -66,7 +66,7 @@ public class Client implements Runnable {
 		connectToServer();
 		while(true){
 			try {
-				saySomething(Program1.me.tamponProducteurConsommateur.pullInBuffer());
+				saySomething(Program1.me.tamponProducteurConsommateur.pullInBuffer());				
 			} catch (InterruptedException ex) {
 				Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
 			}

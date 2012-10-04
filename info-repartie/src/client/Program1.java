@@ -1,6 +1,8 @@
 package client;
 
 import common.*;
+import java.io.IOException;
+import java.net.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.*;
@@ -48,4 +50,5 @@ public class Program1 implements Runnable {
 		}
 		
 	}
+	
 }
