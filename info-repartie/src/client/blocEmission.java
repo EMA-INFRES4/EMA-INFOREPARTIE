@@ -28,7 +28,12 @@ public class blocEmission extends Thread{
 				socketEmission = new Socket("127.0.0.1", 2000);
 				myBufferWriter = new PrintWriter(new OutputStreamWriter(socketEmission.getOutputStream()),true);
 				myBufferWriter.flush();
-				myBufferWriter.println("test");
+					
+			try {
+					myBufferWriter.println(Program1.tamponEmissionPrg.pullInBuffer());
+				} catch (InterruptedException ex) {
+					Logger.getLogger(blocEmission.class.getName()).log(Level.SEVERE, null, ex);
+				}
 
 				
 			} catch (UnknownHostException ex) {

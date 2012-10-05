@@ -39,7 +39,7 @@ public class blocReception extends Thread {
 				
 				try {
 					System.out.println(textMess);
-					myTamponReception.pushInBuffer(textMess);
+					Program1.tamponReceptionPrg.pushInBuffer(textMess);
 					// traitement du message :  System.out.print(textMess);
 				} catch (InterruptedException ex) {
 					Logger.getLogger(blocReception.class.getName()).log(Level.SEVERE, null, ex);
