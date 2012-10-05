@@ -14,6 +14,8 @@ import server.*;
 public class Program1 implements Runnable {
 	
 	public static Tampon tamponProducteurConsommateur = new Tampon(10);
+	public static tamponReception tamponReceptionPrg = new tamponReception(10);
+	//public static TamponEm tamponEmissionPrg = new Tampon(10);
 	public static Program1 me;
 	Horloge lamport = new Horloge();
 	

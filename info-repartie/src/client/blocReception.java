@@ -1,4 +1,4 @@
-package server;
+package client;
 
 import client.tamponReception;
 import java.io.BufferedReader;
@@ -33,11 +33,12 @@ public class blocReception extends Thread {
 
 				buffer = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
 
-				while(!buffer.ready()) {};
+				while(!buffer.ready()) {}
 
 				String textMess = buffer.readLine();
 				
 				try {
+					System.out.println(textMess);
 					myTamponReception.pushInBuffer(textMess);
 					// traitement du message :  System.out.print(textMess);
 				} catch (InterruptedException ex) {
