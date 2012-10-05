@@ -17,13 +17,13 @@ public class InfoRepartie {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) throws InterruptedException {
-		// Start client
-		Thread client = new Thread(new Program1());
-		client.start();
-				
 		// Start server
 		Thread serveur = new Thread(new Program2());
 		serveur.start();
+		
+		// Start client
+		Thread client = new Thread(new Program1());
+		client.start();
 		
 		blocReception serveurRecept = new blocReception();
 		serveurRecept.start();
