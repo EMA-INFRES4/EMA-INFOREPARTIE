@@ -19,8 +19,8 @@ public class Tampon {
 	 * @param size Buffer Size
 	 */
 	public Tampon(int size){
-		this.buffer = new ArrayList<String>();
-		this.bufferSize=size;
+		this.buffer		= new ArrayList<String>();
+		this.bufferSize = size;
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class Tampon {
 	 * @param infoValue Info to add in the buffer
 	 */
 	public synchronized void pushInBuffer(String infoValue) throws InterruptedException{
-		if(buffer.size()==bufferSize){
+		if(buffer.size() == bufferSize){
 			wait();
 		}
 		else {

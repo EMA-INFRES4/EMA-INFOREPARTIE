@@ -26,12 +26,11 @@ public class blocReception extends Thread {
 	@Override
 	public void run() {
 		try {
-			socketserver = new ServerSocket(2000);
-			tamponReception myTamponReception = new tamponReception(1000);
+			socketserver						= new ServerSocket(2000);
+			tamponReception myTamponReception	= new tamponReception(1000);
 			while(true){
 				socketClient = socketserver.accept();
-
-				buffer = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
+				buffer		 = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
 
 				while(!buffer.ready()) {}
 

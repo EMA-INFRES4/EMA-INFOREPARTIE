@@ -13,16 +13,16 @@ import server.*;
  */
 public class Program1 implements Runnable {
 	
-	public static Tampon tamponProducteurConsommateur = new Tampon(10);
-	public static tamponReception tamponReceptionPrg = new tamponReception(10);
-	public static tamponEmission tamponEmissionPrg = new tamponEmission(10);
+	public static Tampon tamponProducteurConsommateur	= new Tampon(10);
+	public static tamponReception tamponReceptionPrg	= new tamponReception(10);
+	public static tamponEmission tamponEmissionPrg		= new tamponEmission(10);
 	public static Program1 me;
 	Horloge lamport = new Horloge();
 	
 	@Override
 	public void run() {
 	
-		Program1.me = this;
+		Program1.me	 = this;
 		Thread fils1 = new Thread(new Client("127.0.0.1" , 5234));
 		fils1.start();
 		

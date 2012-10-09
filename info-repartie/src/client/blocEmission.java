@@ -18,8 +18,8 @@ import java.util.logging.Logger;
  * @author Cyril
  */
 public class blocEmission extends Thread{
-	protected Socket socketEmission;
-	protected PrintWriter myBufferWriter;
+protected Socket socketEmission;
+protected PrintWriter myBufferWriter;
 
 	@Override
 	public void run() {
@@ -29,7 +29,7 @@ public class blocEmission extends Thread{
 				myBufferWriter = new PrintWriter(new OutputStreamWriter(socketEmission.getOutputStream()),true);
 				myBufferWriter.flush();
 					
-			try {
+				try {
 					myBufferWriter.println(Program1.tamponEmissionPrg.pullInBuffer());
 				} catch (InterruptedException ex) {
 					Logger.getLogger(blocEmission.class.getName()).log(Level.SEVERE, null, ex);

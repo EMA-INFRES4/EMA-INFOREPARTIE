@@ -19,8 +19,8 @@ public class tamponEmission {
 	 * @param size Buffer Size
 	 */
 	public tamponEmission(int size){
-		this.buffer = new ArrayList<String>();
-		this.bufferSize=size;
+		this.buffer		= new ArrayList<String>();
+		this.bufferSize = size;
 	}
 	
 	/**
@@ -32,7 +32,7 @@ public class tamponEmission {
 			return null;
 		}
 		else {
-			String returnValue =  buffer.get(0);
+			String returnValue = buffer.get(0);
 			buffer.remove(0);
 			notifyAll();
 			return returnValue;
@@ -44,7 +44,7 @@ public class tamponEmission {
 	 * @param infoValue Info to add in the buffer
 	 */
 	public synchronized void pushInBuffer(String infoValue) throws InterruptedException{
-		if(buffer.size()==bufferSize){
+		if(buffer.size() == bufferSize){
 			wait();
 		}
 		else {
