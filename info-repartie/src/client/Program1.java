@@ -44,6 +44,7 @@ public class Program1 implements Runnable {
 				Message msg = new Message(messages[i], lamport.getTime());
 				// Send message
 				tamponProducteurConsommateur.pushInBuffer(msg.toString());
+				tamponEmissionPrg.pushInBuffer(msg.toString());
 				Thread.sleep(1000);
 			} catch (InterruptedException ex) {
 				Logger.getLogger(Program1.class.getName()).log(Level.SEVERE, null, ex);
